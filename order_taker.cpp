@@ -4,12 +4,58 @@
 
 using namespace std;
 
+void display_menu();
+void selection(char);
+void display(const vector<int> &v);
+void add(vector<int> &v);
+void mean(vector<int> v);
+void small(vector<int> v);
+void large(vector<int> v);
+void quit();
+void unknown();
+
+
 int main() {
     
+    vector<int> list{};
     char choice{};
-    vector<int> lists{};
     
     do {
+    display_menu();
+    selection(choice);
+    switch (choice) {
+        case 'P':
+            display(list);
+            break;
+        case 'A':
+            add(list);
+            break;
+        case 'M':
+            mean(list);
+            break;
+        case 'S':
+            small(list);
+            break;
+        case 'L':
+            large(list);
+            break;
+        case 'Q':
+            quit();
+            break;
+        default:
+            unknown();
+            break;
+    }
+
+}
+
+while (choice != 'Q');
+
+    cout << endl;
+    return 0;
+}
+
+void display_menu() {
     cout << "\nP - Print numbers\n";
     cout << "A - Add numbers\n";
     cout << "M - Display mean of numbers\n";
@@ -17,74 +63,66 @@ int main() {
     cout << "S - Display smallest number\n";
     cout << "Q - Quit\n" << endl;
     cout << "Enter your choice:";
-    
+}
+
+void selection(char choice) {
     cin >> choice;
+    choice = toupper(choice);
     
-    
-    if (choice == 'p' || choice == 'P') {
-        cout << "[ ";
-                if (lists.size() == 0)
-                    cout <<" ] - the list is empty\n";
-                else {for (auto list:lists) {
-                    cout << list << " ";
-                }
-        cout << "]";
-                }
-        
-    } 
-    
-    if (choice == 'a' || choice == 'A') {
-        int new_number{};
-        cout << "Enter a number to add:";
-        cin >> new_number;
-        
-        lists.push_back(new_number);
-        
-        cout << new_number << " added to the list\n";
-    }
-        
-    if (choice == 'm' || choice == 'M') {
-        double sum{0.0};
-            for (int i{0}; i < lists.size(); ++i)
-                sum = sum + lists.at(i);
-        cout << "The mean of the list is " << sum / lists.size() << endl;
-    }
-    
-    
-    if (choice == 's' || choice == 'S') {
+}
 
-    int small{};
+void display(const vector<int> &v) {
+    
+    if (v.size() == 0)
+        cout << "[] - list is empty";
+    else cout << "[ ";
+        for (auto l:v)
+            cout << l << endl;
+        cout << " ]";
         
-            for (int j{0}; j < lists.size(); ++j) 
-                
-                if (lists.at(0) <= lists.at(j)) 
-                    small = lists.at(0);
-                else small = lists.at(j);
-                
-        cout << small << " is the smallest number\n";
-    }
-    
-    
-    if (choice == 'l' || choice == 'L') {
+}
 
-        int big{};
+void add(vector<int> &v) {
+    int new_number{};
+    
+    cout << "Type in an integer to add: ";
+    cin >> new_number;
+    v.push_back(new_number);
+    cout << new_number << " added to the list.";
+}
 
-            for (int j{0}; j < lists.size(); ++j) 
-                
-                if (lists.at(0) >= lists.at(j)) 
-                    big = lists.at(0);
-                else big = lists.at(j);
-                
-        cout << big << " is the largest number\n";
-    }
+void mean(const vector<int> v) {
     
-    
-    else cout << "Unknown input try again...\n";
-    
-    }
+int sum{};
+    for (auto s:v)
+        sum += s;
+    cout << "The mean is " << sum / v.size() << ".";
 
-    while (choice != 'q' && choice != 'Q');
+}
+
+void small(const vector<int> v) {
     
-    cout << endl;
-    return 0;
+int smallest{};
+    for (size_t i{0}; i < v.size(); ++i)
+        if (v.at(0) <= v.at(i))
+            smallest = v.at(0);
+        else smallest = v.at(i);
+    cout << "The smallest number is " << smallest << ".";
+}
+
+void large(const vector<int> v) {
+    int largest{};
+    for (size_t i{0}; i < v.size(); ++i)
+        if (v.at(0) >= v.at(i))
+            largest = v.at(0);
+        else largest = v.at(i);
+    cout << "The largest number is " << largest << ".";
+}
+
+void quit() {
+    false;
+}
+
+void unknown() {
+    cout << "Unknown input try again...";
 }
