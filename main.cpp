@@ -4,34 +4,28 @@
 
 using namespace std;
 
-
-
 int main() {
+    int num;
+    vector<int> primes{};
+
+    cout << "Prime numbers up to: ";
+    cin >> num;
     
-    int num{10};
+    for (size_t i{1}; i <= num; ++i) {
+        vector<int>factors{};
+        
+        for (size_t z{1}; z <= i; ++z) {
+            if (i % z == 0) 
+                factors.push_back(z);
+        }
+            if (factors.size() == 2)
+                primes.push_back(i);
+        
+            
+        }
     
-    cout << num << endl;
-    cout << sizeof num << endl;
-    cout << &num << endl;
     
-    int *num_pointer{nullptr};
-    
-    num_pointer = &num;
-    
-    cout << &num << endl;
-    cout << num_pointer << endl;
-    cout << *num_pointer << endl;
-    
-    vector<string> names{"Jiwoo", "Joanne", "Jessica"};
-    vector<string> *names_ptr{nullptr};
-    
-    names_ptr = &names;
-    
-    cout << (*names_ptr).at(0) << endl;
-    
-    for (auto list:*names_ptr)
-        cout << list << endl;
-    
-    cout << endl;
-    return 0;
+    for (auto p:primes) {
+        cout << p << endl;
+    }
 }
