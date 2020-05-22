@@ -1,0 +1,39 @@
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Player {
+    public:
+    //attributes
+    string name;
+    int health;
+    int xp;
+    
+    //methods
+    void talk(string text) {cout << name << ": " << text << endl;}
+    bool is_dead();
+};
+
+int main() {
+    
+    Player Jiwoo;
+    Jiwoo.name = "Jiwoo";
+    Jiwoo.health = 100;
+    Jiwoo.xp = 15;
+    
+    Jiwoo.talk("Hello");
+    
+    Player *Enemy = new Player;
+    (*Enemy).name = "Enemy";
+    (*Enemy).health = 100;
+    (*Enemy).xp = 20;
+    
+    Enemy->talk("Fight me!");
+    delete Enemy;
+    
+    cout << endl;
+    return 0;
+}
