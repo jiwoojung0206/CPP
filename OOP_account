@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Account {
+    private:
+    string name;
+    double balance;
+    
+    public:
+    void set_balance(double bal) {balance = bal;}
+    double get_balance() {return balance;}
+    
+    void set_name(string n);
+    string get_name();
+    
+    bool deposit(double amount);
+    bool withdraw(double amount);
+};
+
+void Account::set_name(string n) {
+    name = n;
+}
+
+string Account::get_name() {
+    return name;
+}
+
+bool Account::deposit(double amount) {
+    //verify amount
+    balance += amount;
+    return 1;
+}
+
+bool Account::withdraw(double amount) {
+    if (balance < amount)
+        return 0;
+    else (balance -= amount);
+        return 1;
+}
+
+int main() {
+    
+    Account saving;
+    saving.set_name("Jiwoo");
+    saving.set_balance(500.00);
+    
+    if (saving.deposit(200.00))
+        cout << "Complete" << endl;
+    else cout << "Denied" << endl;
+    
+    if (saving.withdraw(200.00))
+        cout << "Complete" << endl;
+    else cout << "Denied" << endl;
+    
+    if (saving.withdraw(700.00))
+        cout << "Complete" << endl;
+    else cout << "Denied" << endl;
+    
+    
+    cout << endl;
+    return 0;
+}
