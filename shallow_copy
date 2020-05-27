@@ -1,0 +1,58 @@
+
+#include <iostream>
+
+using namespace std;
+
+class Shallow{
+private:
+    int *data;
+    
+public:
+    void set_value(int d) {*data = d;}
+    int get_value() {return *data;}
+    
+    //constructor
+    Shallow(int d);
+    
+    //copy constructor
+    Shallow(const Shallow &source);
+    
+    //destructor
+     ~Shallow();
+};
+
+Shallow::Shallow(int d) {
+    data = new int;
+    *data = d;
+}
+
+//shallow copy
+Shallow::Shallow(const Shallow &source)
+    : data(source.data) {
+    }
+
+Shallow::~Shallow() {
+    delete data;
+}
+
+void display_shallow(Shallow s) {
+    cout << s.get_value() << endl;
+}
+
+int main() {
+    
+    Shallow alpha{100};
+    display_shallow(alpha);
+    //copies address of data and not data itself
+    //destructor deletes real data
+    //memory of alpha is gone
+    
+    Shallow beta{alpha};
+    //points to invalid data
+    beta.set_value(200);
+    //both alpha and beta change to 200
+    //program crashes when destructor executes
+    
+    cout << endl;
+    return 0;
+}
