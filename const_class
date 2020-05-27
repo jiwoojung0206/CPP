@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Player{
+private:
+    string name;
+    int health;
+    int xp;
+    
+public:
+    void set_name(string n) {name = n;}
+    string get_name() const {return name;} 
+    
+    //Overloaded constructors
+    
+    Player()
+        : name{"None"}, health{100}, xp{0} {
+        }
+    
+    Player(string name_val)
+        : name{name_val}, health{100}, xp{0} {
+        }
+    
+    Player(string name_val, int health_val, int xp_val)
+        : name{name_val}, health{health_val}, xp{xp_val} {
+        }
+    
+};
+
+void display_name(const Player &p) {
+    cout << p.get_name() << endl;
+}
+
+int main() {
+    
+    const Player Jiwoo;
+    display_name(Jiwoo);
+    
+    
+    cout << endl;
+    return 0;
+}
