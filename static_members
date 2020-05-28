@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Player{
+private:
+    static int num_players;
+    string name;
+    int health;
+    int xp;
+    
+public:
+    void set_name(string n) {name = n;}
+    string get_name() {return name;}
+    int get_health() {return health;}
+    int get_xp() {return xp;}
+    
+    Player()
+        : Player("None", 100, 0) {
+        }
+    
+    Player(string name_val)
+        : Player(name_val, 100, 0) {
+        }
+        
+    Player(string name_val, int health_val, int xp_val) 
+        : name{name_val}, health{health_val}, xp{xp_val} {
+            ++num_players;
+    }
+    
+    Player(const Player &source);
+    
+    ~Player();
+    
+    static int get_num_players();
+};
+
+int Player::num_players{0};
+
+Player::Player(const Player &source) 
+    : Player(source.name, source.xp, source.health) {
+}
+
+Player::~Player() {
+    --num_players;
+}
+
+int Player::get_num_players() {return num_players;}
+
+void display_active_players() {
+    cout << "Active players: " << Player::get_num_players() << endl;
+}
+
+int main() {
+    
+    Player Jiwoo;
+    display_active_players();
+    
+    Player Joanne;
+    display_active_players();
+    
+    Player Jessica;
+    display_active_players();
+    
+    cout << endl;
+    return 0;
+}
